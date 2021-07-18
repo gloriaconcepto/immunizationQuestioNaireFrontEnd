@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,47 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.dark-green-gradient-background { 
+  background: -webkit-linear-gradient(360deg,#224e4d 10%,#083023 360%); 
+  background: linear-gradient(360deg,#224e4d 10%,#083023 360%); 
+}
+
+.classy-subtle-dark-gray-gradient {
+   /* background: -webkit-linear-gradient(360deg,#383836 10%,#4a4a4a 360%); 
+   background: linear-gradient(360deg,#383836 10%,#4a4a4a 360%);  */
+   background: -webkit-linear-gradient(360deg,#151826 10%,#4a4a4a 360%); 
+   background: linear-gradient(360deg,#151826 10%,#4a4a4a 360%); 
+  }
+
+.imageLoaderDiv{
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+}
+
+.text-font{
+  
+    font-family: Noto Sans,sans-serif;
+  
+}
+.header-text{
+  position: absolute;
+  top: 12rem;
+  left:41%;
+}
+.button-position{
+ margin-bottom: 2rem;
+}
+
+.registration-form-position{
+  margin-bottom: 22rem
+}
+
+.formInput{
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0rem;
 }
