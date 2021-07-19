@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { Card, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Spinner } from "reactstrap";
 import ParentForm from "./ImmunisationForm/ParentForm";
 import ChildForm from "./ImmunisationForm/ChildForm";
 const Registration = memo(() => {
@@ -7,7 +7,9 @@ const Registration = memo(() => {
     const [formSetting, setFormSetting] = useState(1);
     const [parentDataBase, setParentDataBase] = useState([]);
     const [kidsArry, setKidsArry] = useState([]);
+    const [kidsDataBase, setKidsDatabase] = useState([]);
     const [kidActiveForm, setKidActiveForm] = useState(0);
+    const [isSpinning, setIsSpinning] = useState(false);
 
     const showKidsForm = (data) => {
         //save the parent details
@@ -30,7 +32,9 @@ const Registration = memo(() => {
 
         //next button should only set the active number
     };
-    const nextStep = (no) => {
+    const nextStep = (no, data) => {
+        console.log(data);
+        setKidsDatabase((arr) => [...arr, data]);
         //check if it is the last step
         if (kidsArry[no + 1] === undefined) {
             //show submit form
@@ -38,7 +42,7 @@ const Registration = memo(() => {
         } else {
             //set the active form
             setKidActiveForm(no + 1);
-        
+
             if (no === 0) {
                 setSubTitle(`Kid 2 Details Form`);
             } else {
@@ -59,6 +63,17 @@ const Registration = memo(() => {
             // console.log(cloneArr);
         }
     };
+    const submitQuestinaire = () => {
+        setIsSpinning(true);
+        //parent data capture
+        console.log(parentDataBase);
+        console.log(kidsDataBase);
+        let submitedDetails = {
+            parentDetails: parentDataBase && parentDataBase[0],
+            kidDetails: kidsDataBase,
+        };
+        console.log("final database", submitedDetails);
+    };
     return (
         <div style={{ color: "#35384F" }}>
             {console.log(kidsArry)}
@@ -75,7 +90,13 @@ const Registration = memo(() => {
 
                         {formSetting === 2 && kidsArry.map((key, index) => <div key={index}>{kidActiveForm === key && <ChildForm kidNo={key} nextStep={nextStep} />}</div>)}
 
-                        {formSetting === 3 && <div>Submit form layout</div>}
+                        {formSetting === 3 && (
+                            <div>
+                                <Button style={{ backgroundColor: "#35384F", width: `13rem` }} onClick={() => submitQuestinaire()}>
+                                    {isSpinning ? <Spinner color="secondary" children={""} size="sm" /> : "Submit"}
+                                </Button>{" "}
+                            </div>
+                        )}
                     </CardBody>
                 </CardBody>
             </Card>

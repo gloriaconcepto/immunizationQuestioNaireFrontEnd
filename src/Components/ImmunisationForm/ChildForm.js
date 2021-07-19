@@ -21,7 +21,14 @@ const ChildForm = memo(({ kidNo, nextStep }) => {
     const [noImmuInValid, setNoImmuInValid] = useState(false);
     const [noImmuValid, setNoImmuValid] = useState(false);
     const nextkidsForm = () => {
-        nextStep(kidNo);
+        //capture the kid data
+        let formatData = {
+            kidName: kidName,
+            kidsex: kidsex,
+            hasKidImmu: hasKidImmu,
+            noImmu: hasKidImmu === "Yes" ? parseInt(noImmu) : 0,
+        };
+        nextStep(kidNo, formatData);
     };
     const onFieldChange = (e) => {
         if (e && e.target.id === "kidName") {
